@@ -102,6 +102,19 @@ var sevenUpp : String
 sevenUp = nil
 //sevenUpp = nil
 
+//Force unwrapping, the '!' is used to access the value.
+var name: String?
+name = "Jon"
+//!= means not equal to
+if name != nil {
+    let newString = String ("Hello " + name!)
+    print (newString)
+}
+
+//better method than force unwrapping
+//Optional binding
+
+
 
 
 
