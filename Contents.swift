@@ -148,6 +148,46 @@ case .Puzzle(let price, let pieces):
 print("World Puzzle is a puzzle with \(pieces) and sells for \(price)")
 }
 
+//Array where the type is 'Any'
+var myArray: [Any] = [1,"Two"]
+//Initialized an array of a certain size with all the elements of the array set to a predefined value.
+var arrayFour = [Int](repeating: 3, count: 7)
+//multidimensional array
+var multiArrayTwo = [[Int]]([[1,2], [3,5]])
+//stores 2 in value
+let value = multiArrayTwo[0][1]
+//printing first and last values
+let first = multiArrayTwo.first
+let last = multiArrayTwo.last
+let arrLast1 = multiArrayTwo[1].last
+print (first!)
+print (last!)
+print (arrLast1!)
+//count property
+var multiArrayOne = [[3,4],[5,6],[7,8]]
+print(multiArrayOne[0].count)
+print (multiArrayOne.isEmpty)
+//add element to the end of a mutable array
+multiArrayOne.append([3,7])
+print (multiArrayOne)
+//insert a new value into an array
+multiArrayOne.insert([10,4], at:1)
+print (multiArrayOne)
+//replacing element in an array
+multiArrayOne[0] = [5,9]
+print (multiArrayOne)
+//removing elements
+multiArrayOne.removeLast()
+multiArrayOne.remove(at:2)
+multiArrayOne.removeAll()
+
+
+
+
+
+
+
+
 
 
 
