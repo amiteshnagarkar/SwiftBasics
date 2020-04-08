@@ -179,7 +179,134 @@ print (multiArrayOne)
 //removing elements
 multiArrayOne.removeLast()
 multiArrayOne.remove(at:2)
-multiArrayOne.removeAll()
+//multiArrayOne.removeAll()
+
+//merging arrays
+var combined = multiArrayOne + multiArrayOne
+print (combined)
+//getting sub array from an array using subscript syntax
+var subArray = combined[2...4]
+print (subArray)
+//excludes the last element
+var halfOpenRange = combined[2..<4]
+print (halfOpenRange)
+var oneSided = combined[..<3]
+print (oneSided)
+//bulk changes to an array
+var arrayOnee = [1,2,3,4,5]
+arrayOnee[1...3] = [12,13,14,15]
+
+//Algorithms
+//Sort
+//the $0 & $1 are closures??
+//ascending
+var arrayTwo = [9,3,6,2,8,5]
+arrayTwo.sort(){ $0 < $1 }
+//descending
+var arrayThree = [9,3,6,2,8,5]
+arrayThree.sort(){ $1 < $0 }
+
+//Sorted
+//does not change original array like in Sort
+let sorted = arrayThree.sorted() {$0 < $1}
+print (sorted)
+
+//Filter
+var arrayOne = [1,2,3,4,5,6,7,8,9]
+let filtered = arrayOne.filter{$0 > 3 && $0 < 7}
+//filtering strings
+//checks if the if the string has 'o'
+var city = ["Boston", "London", "Chicago", "Atlanta"]
+let filteredd = city.filter{$0.range(of:"o") != nil}
+
+//Map
+//used to apply logic to elements in an array
+var arrayFive = [10, 20, 30, 40]
+let applied = arrayFive.map{ $0 / 10}
+
+//forEach; to iterate over a sequence
+var arraySix = [10, 20, 30, 40]
+arraySix.forEach{ print($0) }
+
+//for-in loop is better to iterate
+var arraySeven = ["one", "two", "three"]
+for item in arraySeven {
+print(item)
+}
+
+//also shows index; enumerated method which returns tuple
+var arrayEight = ["one", "two", "three"]
+for (index,value) in arrayEight.enumerated() {
+print("\(index) \(value)")
+}
+
+//Dictionaries
+//unique id mapped to each element, not a index.
+//can use custom obbjects as a key
+
+//Initialising
+//mutable
+var countries = ["US":"UnitedStates","IN":"India","UK":"UnitedKingdom"]
+//accessing dictionary values
+var nameOfCountry = countries["US"]
+//counting the key value pairs
+var cnt = countries.count
+//check if dictionary is empty
+var empty = countries.isEmpty
+//updating value of a key
+countries["UK"] = "Great Britain"
+var orig = countries.updateValue("Britain", forKey: "UK")
+//adding a key value pair
+countries["FR"] = "France"
+var origg = countries.updateValue("Germany", forKey: "DE")
+print (countries)
+//removing a key value pair
+countries["IN"] = nil
+//returns the value of key prior to removing it.
+var origgg = countries.removeValue (forKey:"UK")
+//countries.removeAll()
+
+
+//Set Type
+//similar to array but unordered where each type should be unique.
+
+//initalise
+//mutable
+var mySet = Set(["one", "two", "three"])
+//inserting items
+mySet.insert("One")
+//check if inserted
+var results = mySet.insert("One")
+if results.inserted {
+print("Success")
+} else {
+//this is printed
+print("Failed")
+}
+//determine how many items in set
+var count = mySet.count
+//determine if set contains an item
+var contain = mySet.contains("two")
+//iterating over a set
+for item in mySet {
+print(item)
+}
+//removing item from set
+var item = mySet.remove("two")
+//removing all items from set
+mySet.removeAll()
+
+//set operations
+var mySet1 = Set(["One", "Two", "Three", "abc"])
+var mySet2 = Set(["abc","def","ghi", "One"])
+//union method
+var newSetUnion = mySet1.union(mySet2)
+
+
+
+
+
+
 
 
 
