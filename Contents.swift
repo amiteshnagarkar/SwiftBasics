@@ -269,6 +269,8 @@ var origgg = countries.removeValue (forKey:"UK")
 
 //Set Type
 //similar to array but unordered where each type should be unique.
+//the 4 operations add functionality which is not available in arrays.
+//faster lookup speeds
 
 //initalise
 //mutable
@@ -300,20 +302,309 @@ mySet.removeAll()
 var mySet1 = Set(["One", "Two", "Three", "abc"])
 var mySet2 = Set(["abc","def","ghi", "One"])
 //union method
+//takes unique values from both sets to make another.
 var newSetUnion = mySet1.union(mySet2)
+//or
+mySet1.formUnion(mySet2)
+//subtracting methods
+//creates a set with values from first set but not in seconds set
+var newSetSubtract = mySet1.subtracting(mySet2)
+//or
+mySet1.subtract(mySet2)
+//intersection method
+//new set with values that are common between the two sets.
+var newSetIntersect = mySet1.intersection(mySet2)
+//or
+mySet1.formIntersection(mySet2)
+//symmetric difference methods
+//creates a new set with values that are in either set but not in both.
+var newSetExclusiveOr = mySet1.symmetricDifference(mySet2)
+//or
+mySet1.formSymmetricDifference(mySet2)
+
+
+//Tuples
+//groups multiple values into a single compound
+//values do not have to be the same type
+//good for storing data where methods arent needed
+
+//defining a tuple
+var team = ("Boston", "Red Sox", 97, 65, 59.9)
+var cityy = team.0
+var namee = team.1
+var wins = team.2
+var loses = team.3
+
+//Conditional Statements
+
+//if
+let teamOneScore = 7
+let teamTwoScore = 6
+if teamOneScore>teamTwoScore {
+print("Team One Won")
+}
+
+//if else
+let team3Score = 7
+let team4Score = 6
+if team3Score>team4Score {
+print("Team 3 Won")
+} else if team4Score>team3Score {
+print("Team 4 Won")
+} else {
+print("We have a tie")
+}
+
+//guard statement
+//This statement focuses on performing a function if a condition is false; this allows us to trap errors and perform the error conditions early in our functions.
+func guardFunction(str: String?) {
+guard let goodStr = str else {
+print("Input was nil")
+return
+}
+print("Input was \(goodStr)")
+}
+
+//for...in loop
+//array
+var countriess = ["USA","UK", "IN"]
+for item in countriess {
+print(item)
+}
+//dictionary
+var dic = ["USA": "United States", "UK": "United Kingdom","IN":"India"]
+for (abbr, name) in dic {
+print("\(abbr) -- \(name)")
+}
+
+//while loop
+//when no of iterations are unknown
+//used to run a loop zero or more times
+//checks conditional statements prior
+var ran = 0
+while ran < 7 {
+ran = Int(arc4random_uniform(10))
+}
+
+//repeat-while loop
+var rann: Int
+repeat {
+rann = Int(arc4random_uniform(10))
+} while rann < 4
+
+//switch statements
+//The switch statement takes a value, compares it to several possible matches, and executes the appropriate block of code based on the first successful match.
+var speed = 300000000
+switch speed {
+case 300000000:
+print("Speed of light")
+case 340:
+print("Speed of sound")
+default:
+print("Unknown speed")
+}
+//range
+var grade = 93
+switch grade {
+case 90...100:
+print("Grade is an A")
+case 80...89:
+print("Grade is a B")
+case 70...79: break
+default:
+print("Unknown Grade")
+}
+
+//where statement in for-in loop
+for number in 1...30 where number % 2 == 0 {
+print(number)
+}
+//for-case let statement
+var worldSeriesWinners = [
+("Red Sox", 2004),
+("White Sox", 2005),
+("Cardinals", 2006),
+("Red Sox", 2007),
+("Phillies", 2008),
+("Yankees", 2009),
+("Giants", 2010),
+("Cardinals", 2011),
+("Giants", 2012),
+("Red Sox", 2013),
+("Giants", 2014),
+("Royals", 2015)
+]
+for case let ("Red Sox", year) in worldSeriesWinners {
+print(year)
+}
+
+//filtering nil values in an array
+let myNumbers: [Int?] = [1, 2, nil, 4, 5, nil, 6]
+for case let .some(num) in myNumbers {
+print(num)
+}
+
+//if case
+enum Identifier {
+case Name(String)
+case Number(Int)
+case NoIdentifier
+}
+var playerIdentifier = Identifier.Number(2)
+if case let .Number(num) = playerIdentifier {
+print("Player's number is \(num)")
+}
+
+//Control Transfer statements
+//to transfer control to another part of the code
+
+//contiunue statement
+for i in 1...10 {
+if i % 2 == 0 {
+continue
+}
+print("\(i) is odd")
+}
+
+//break statement
+for i in 1...10 {
+if i % 2 == 0 {
+break
+}
+print("\(i) is odd")
+}
+
+//fall through statements
+//to force to go down...
+var personName = "Jon"
+var sport = "Baseball"
+switch sport {
+case "Baseball":
+print("\(personName) plays Baseball")
+fallthrough
+case "Basketball":
+print("\(personName) plays Basketball")
+fallthrough
+default:
+print("Unknown sport")
+}
+
+//Functions
+//block of code that performs a specific task
+//resuable
+//has parameters/arguments
+
+//single parameter function
+func sayHello2(name: String) ->String {
+let retString = "Hello " + name
+//print(retString)
+return retString
+}
+//calling a single parameterfunction
+sayHello2(name: "Amitesh")
+//inputting returned value in variable
+var message = sayHello2(name:"Jon")
+//underscore tells compiler u are aware of the return value but do not want to use it.
+_ = sayHello2(name:"Jon")
+//using discardresult also tells the compiler ^
+@discardableResult func sayHello3(name: String) ->String {
+let rexString = "Hello " + name
+return rexString
+}
+
+
+//multiparameter function
+func sayHello(name: String, greeting: String) {
+print("\(greeting) \(name)")
+}
+//calling a multiparameter function
+sayHello(name:"Jon", greeting:"Bonjour")
+
+//defining a parameters default values.
+func sayHello3(name: String, greeting: String = "Bonjour") {
+print("\(greeting) \(name)")
+}
+
+//returning multiple values from a function
+//tuple is used so data can be any type
+func getTeam() -> (team:String, wins:Int, percent:Double) {
+let retTuple = ("Red Sox", 99, 0.611)
+return retTuple
+}
+var t = getTeam()
+print("\(t.team) had \(t.wins) wins")
+
+//returning optional values
+func getTeam2(id: Int) -> (team:String, wins:Int, percent:Double)? {
+if id == 1 {
+return ("Red Sox", 99, 0.611)
+}
+return nil
+}
+
+//Adding external parameeter names
+//makes code easier to read...
+func winPercentage(baseballTeam team: String, withWins wins: Int, andLoses losses: Int) -> Double {
+return Double(wins) / Double(wins + losses)
+}
+//calling
+var per = winPercentage(baseballTeam:"Red Sox", withWins:99, andLoses:63)
+
+//variadic parameters
+//accepts 0 or more values of a specified type
+func sayHello4(greeting: String, names: String...) {
+for name in names {
+print("\(greeting) \(name)")
+}
+}
+//calling
+sayHello4(greeting:"Hello", names: "Jon","Kim")
+
+
+//inout parameters
+//If we want to change the value of a parameter and we want those changes to persist once the function ends
+//cannot have default values or be variadic
+func reverse(first: inout String, second: inout String) {
+let tmp = first
+first = second
+second = tmp
+}
+//calling
+var one = "One"
+var two = "Two"
+//the &(ampersand) indicates the function can modify the value of the variable.
+reverse(first: &one, second: &two)
+print("one: \(one) two: \(two)")
 
 
 
+//PUTTING ALL TOGETHER
 
+//function used for function below
+func validOctet(octet: String) ->Bool {
+guard let num = Int(String(octet)),(num >= 0) && (num < 256) else {
+return false
+    }
+    return true
+}
 
-
-
-
-
-
-
-
-
+//test to see if a string value contains a valid IPv4 address.
+func isValidIP(ipAddr: String?) ->Bool {
+guard let ipAddr = ipAddr else {
+return false
+}
+//let octets = ipAddr.characters.split { $0 == "."}.map{String($0)}
+let octets = ipAddr.components(separatedBy: ".")
+guard octets.count == 4 else {
+return false
+}
+for octet in octets {
+guard validOctet(octet: octet) else {
+return false
+}
+}
+return true
+}
 
 
 
