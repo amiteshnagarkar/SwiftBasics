@@ -606,12 +606,235 @@ return false
 return true
 }
 
+//class
+//reference type
+//different parts of your program can share and modify your object
+//follows inheritance; classes can be derived from a parent/superclass.
+class MyClass {
+//code
+}
+
+//struct
+//value type
+//what gets passes around is a copy of the structure
+struct MyStruct {
+// code
+}
 
 
 
 
 
+//stored properties
+//STRUCT
+struct EmployeeStruct {
+var firstName = ""
+var lastName = ""
+//var salaryYear = 0.0
+
+//computed property
+//writeable
+var salaryWeek: Double {
+    get{
+        return self.salaryYear/52
+    }
+    set (newSalaryWeek){
+        self.salaryYear = newSalaryWeek*52
+    }
+        }
+    
+
+var salaryYear: Double = 0.0 {
+    willSet(newSalary) {
+        print("About to set salaryYear to \(newSalary)")
+    }
+    didSet {
+        if salaryWeek>oldValue {
+            print("\(firstName) got a raise.") }
+            else {
+                print("\(firstName) did not get a raise.")
+            }
+        }
+    }
+    
+    func getFullName() -> String {
+    return firstName + " " + lastName
+    }
+    
+    //allows us to modify this property in this struct by adding mutating keyword
+    mutating func giveRaise(amount: Double) {
+    self.salaryYear += amount
+    }
+    
+    //initialiser
+    init() {
+    self.firstName = ""
+    self.lastName = ""
+    self.salaryYear = 0.0
+    }
+    init(firstName: String, lastName: String) {
+    self.firstName = firstName
+    self.lastName = lastName
+    self.salaryYear = 0.0
+    }
+    init(firstName: String, lastName: String, salaryYear: Double) {
+    self.firstName = firstName
+    self.lastName = lastName
+    self.salaryYear = salaryYear
+    }
+
+    
+}
 
 
 
 
+//CLASS
+public class EmployeeClass {
+//stored property
+var firstName = ""
+var lastName = ""
+//var salaryYear = 0.0
+
+//computed property
+//calculate a value
+//writeable
+var salaryWeek: Double {
+    get{
+        return self.salaryYear/52
+    }
+    set (newSalaryWeek){
+        self.salaryYear = newSalaryWeek*52
+    }
+        }
+    
+var salaryYear: Double = 0.0 {
+    //property observer
+    //passes new property as a constant
+    willSet(newSalary) {
+        print("About to set salaryYear to \(newSalary)")
+    }
+    //property observer
+    //passes constant parameter containing old property value.
+    didSet {
+        if salaryWeek>oldValue {
+            print("\(firstName) got a raise.") }
+            else {
+                print("\(firstName) did not get a raise.")
+            }
+        }
+    }
+    
+//method
+//basically a function in  a class but known as a method as its part of the class
+func getFullName() -> String {
+return firstName + " " + lastName
+}
+
+func giveRaise(amount: Double) {
+//we ask for the salaryYear Property for the current instance type, within the the instance
+//mainly used to distinguish between local and instance variables that have the same name
+self.salaryYear += amount
+}
+
+func isEqualFirstName(firstName: String) -> Bool {
+return self.firstName == firstName
+}
+    
+// 3 custom initalisers
+//setting initals values
+init() {
+self.firstName = ""
+self.lastName = ""
+self.salaryYear = 0.0
+}
+init(firstName: String, lastName: String) {
+self.firstName = firstName
+self.lastName = lastName
+self.salaryYear = 0.0
+}
+//with external and internal property names
+init( employeeWithFirstName firstName: String, LastName lastName: String, andSalary salaryYear: Double) {
+self.firstName = firstName
+self.lastName = lastName
+self.salaryYear = salaryYear
+}
+    
+//failable initialiser, valid instance or nil
+//return is included here as instance could be nil if salary < 20,000
+init?(firstName: String, lastName: String, salaryYear: Double) {
+self.firstName = firstName
+self.lastName = lastName
+self.salaryYear = salaryYear
+if self.salaryYear < 20_000 {
+return nil
+}
+}
+    
+    
+}
+
+
+
+/*
+var f = EmployeeStruct(firstName: "Jon", lastName: "Hoffman", salaryYear:
+39_000)
+print(f.salaryWeek) //prints 750.00 to the console
+f.salaryWeek = 1000
+print(f.salaryWeek) //prints 1000.00 to the console
+print(f.salaryYear) //prints 52000.00 to the console
+*/
+
+//ACCESSING METHOD etc OUTSIDE THE CLASS
+//INSTANCE CREATION
+//ACCESSING THE getFullName () Method
+var e = EmployeeClass()
+var enext = EmployeeStruct(firstName: "Jon", lastName: "Hoffman", salaryYear: 50000)
+e.firstName = "Jon"
+e.lastName = "Hoffman"
+e.salaryYear = 50000.00
+print(e.getFullName())
+print(enext.getFullName())
+
+
+//INHERITANCE
+
+class Plant {
+var height = 0.0
+var age = 0
+    
+func growHeight(inches: Double) {
+//height = height + inches
+height += inches;
+    
+}
+}
+
+//subclass of Plant
+//colon indicates the class has a Super Class
+class Tree: Plant {
+var limbs = 0
+    
+func limbGrow() {
+self.limbs += 1
+}
+func limbFall() {
+self.limbs -= 1
+}
+}
+
+class PineTree: Tree {
+var needles = 0
+}
+
+class OakTree: Tree {
+var leaves = 0
+}
+
+//how to use the inheritance
+//creating an instance fo Tree
+var tree = Tree()
+tree.age = 5
+tree.height = 4
+tree.limbGrow()
+tree.limbGrow()
